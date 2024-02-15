@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/skins"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="skin">{{ skin.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-button (click)="setModif()">Rendre Modifiable</ion-button>
+  <div *ngIf="!modif">
+    <ion-grid *ngIf="skin">
+      <ion-row>
+        <ion-col>
+          <strong>En boutique :</strong>
+          <ion-icon *ngIf="skin.onAir" name="checkmark"></ion-icon>
+          <ion-icon *ngIf="!skin.onAir" name="close-circle"></ion-icon>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="onDelete(skin.id)">
+            <ion-icon name="trash"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <img [src]="skin.pictureLink" [alt]="skin.title">
+        </ion-col>
+        <ion-col>
+          <strong>Title</strong><br>
+          {{skin.title}} <br>
+          <strong>Date</strong><br>
+          {{skin.releaseDate}} <br>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div *ngIf="modif">
+    <ion-item>
+      <ion-input type="text" label="Image" [(ngModel)]="skin.pictureLink"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" label="Nom" [(ngModel)]="skin.title"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-input type="text" label="Date" [(ngModel)]="skin.releaseDate"></ion-input>
+    </ion-item>
+    <p class="text-center">
+      <ion-button (click)="onModif()">Modifier</ion-button>
+    </p>
+  </div>
+</ion-content>
